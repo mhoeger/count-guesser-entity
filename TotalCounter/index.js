@@ -23,10 +23,10 @@ module.exports = df.entity(function(context) {
                 newValue = parseFloat(newValue);
             }
             if (typeof newValue === "number") {
-                // Limit unreasonable answers
-                if (newValue > 0 && newValue <= 1000) {
+                // Guess must be a positive value
+                if (newValue > 0) {
                     context.df.setState([previousCount + 1, previousTotal + newValue]);
-                    // If exact match (hard-coded), signal win condition
+                    // If exact match *hard-coded for now*, signal win condition
                     if (newValue == 410) {
                         context.log("found winner!!");
                         const entityId = new df.EntityId("winnercounter", "marbles");
